@@ -1,0 +1,577 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700&amp;family=DM+Mono:wght@400;500&amp;family=Libre+Franklin:wght@300;400;500&amp;family=Nobile:wght@400;500;700&amp;display=swap" rel="stylesheet">
+<style>
+  *{margin:0;padding:0;box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{background:#08080a;-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility}
+  ::selection{background:#8b5cf6;color:#fff}
+  a{color:#c4b5fd;text-decoration:none}
+  a:hover{color:#ede9fe}
+  [data-l="en"]{display:none}
+  .lang-en [data-l="en"]{display:revert}
+  .lang-en [data-l="pt"]{display:none}
+  ::-webkit-scrollbar{width:10px}
+  ::-webkit-scrollbar-track{background:#08080a}
+  ::-webkit-scrollbar-thumb{background:#26262b;border-radius:8px;border:2px solid #08080a}
+  @keyframes floaty{0%,100%{transform:translateY(0)}50%{transform:translateY(-14px)}}
+  @keyframes bob{0%,100%{transform:translateY(0) rotate(-6deg)}50%{transform:translateY(-8px) rotate(4deg)}}
+  .revl{opacity:0;transform:translateY(28px);transition:opacity .7s cubic-bezier(.2,.7,.2,1),transform .7s cubic-bezier(.2,.7,.2,1)}
+  .revl.in{opacity:1;transform:none}
+</style>
+</helmet>
+<template id="__bundler_thumbnail" data-bg-color="#08080a">
+  <svg viewBox="0 0 1200 800" xmlns="http://www.w3.org/2000/svg">
+    <rect width="1200" height="800" fill="#08080a"/>
+    <circle cx="980" cy="180" r="240" fill="#8b5cf6" opacity="0.28"/>
+    <text x="120" y="430" font-family="Georgia,serif" font-size="150" font-weight="700" fill="#f4f4f5">B<tspan fill="#8b5cf6">.</tspan>M</text>
+    <text x="128" y="510" font-family="monospace" font-size="34" letter-spacing="6" fill="#a1a1aa">UX / UI · AI · DS</text>
+  </svg>
+</template>
+<div class="{{ rootClass }}" style="position:relative;width:100%;min-height:100vh;background:#08080a;color:#f4f4f5;font-family:Archivo,sans-serif;overflow-x:hidden">
+
+  <!-- LEFT RAIL -->
+  <div style="position:fixed;left:0;top:0;bottom:0;width:56px;z-index:60;display:flex;flex-direction:column;align-items:center;justify-content:space-between;padding:22px 0;border-right:1px solid rgba(255,255,255,.08);background:rgba(8,8,10,.6);backdrop-filter:blur(8px)">
+    <div style="width:9px;height:9px;border-radius:50%;background:#8b5cf6;box-shadow:0 0 14px #8b5cf6"></div>
+    <div style="writing-mode:vertical-rl;transform:rotate(180deg);font-family:'DM Mono',monospace;font-size:12px;letter-spacing:.42em;text-transform:uppercase;color:#71717a">Portfólio&nbsp;&nbsp;·&nbsp;&nbsp;UX / UI Design</div>
+    <div style="font-family:'DM Mono',monospace;font-size:11px;letter-spacing:.2em;color:#3f3f46">'25</div>
+  </div>
+
+  <!-- TOP NAV -->
+  <nav style="position:fixed;top:0;left:56px;right:0;z-index:55;display:flex;align-items:center;justify-content:space-between;height:68px;padding:0 clamp(20px,4vw,56px);background:rgba(8,8,10,.72);backdrop-filter:blur(14px);border-bottom:1px solid rgba(255,255,255,.07)">
+    <a href="#hero" style="font-family:Nobile,sans-serif;font-weight:700;font-size:17px;letter-spacing:.01em;color:#f4f4f5">Benedita<font color="#8b5cf6"> </font>Magalhães</a>
+    <div style="display:flex;align-items:center;gap:clamp(14px,2.4vw,34px)">
+      <a href="#sobre" style="font-family:'DM Mono',monospace;font-size:13px;letter-spacing:.04em;color:#a1a1aa"><span data-l="pt">Sobre</span><span data-l="en">About</span></a>
+      <a href="#metodo" style="font-family:'DM Mono',monospace;font-size:13px;letter-spacing:.04em;color:#a1a1aa"><span data-l="pt">Método</span><span data-l="en">Method</span></a>
+      <a href="#trabalhos" style="font-family:'DM Mono',monospace;font-size:13px;letter-spacing:.04em;color:#a1a1aa"><span data-l="pt">Trabalhos</span><span data-l="en">Work</span></a>
+      <a href="#ds" style="font-family:'DM Mono',monospace;font-size:13px;letter-spacing:.04em;color:#a1a1aa">Design System</a>
+      <a href="#contato" style="font-family:'DM Mono',monospace;font-size:13px;letter-spacing:.04em;color:#a1a1aa"><span data-l="pt">Contato</span><span data-l="en">Contact</span></a>
+      <div style="display:flex;align-items:center;border:1px solid rgba(255,255,255,.14);border-radius:999px;overflow:hidden;font-family:'DM Mono',monospace;font-size:12px">
+        <button onClick="{{ setPt }}" style="{{ ptBtn }}">PT</button>
+        <button onClick="{{ setEn }}" style="{{ enBtn }}">EN</button>
+      </div>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <section id="hero" style="position:relative;margin-left:56px;min-height:100vh;display:flex;align-items:center;padding:110px clamp(24px,6vw,96px) 60px;overflow:hidden">
+    <div style="position:absolute;inset:0;background:url('assets/fig/tjac-bg.jpg') center/cover no-repeat;opacity:.10;filter:grayscale(1)"></div>
+    <div style="position:absolute;top:-120px;right:-80px;width:520px;height:520px;border-radius:50%;background:radial-gradient(circle,#8b5cf6 0%,transparent 68%);opacity:.28;filter:blur(20px)"></div>
+    <div style="position:absolute;bottom:-140px;left:20%;width:360px;height:360px;border-radius:50%;background:radial-gradient(circle,#1aa179 0%,transparent 70%);opacity:.20;filter:blur(20px)"></div>
+    <div style="position:relative;z-index:2;display:grid;grid-template-columns:1.15fr .85fr;gap:clamp(30px,5vw,80px);align-items:center;width:100%;max-width:1320px;margin:0 auto">
+      <div>
+        <div style="display:inline-flex;align-items:center;gap:10px;padding:8px 16px;border:1px solid rgba(255,255,255,.16);border-radius:999px;margin-bottom:30px;font-family:'DM Mono',monospace;font-size:12.5px;letter-spacing:.14em;text-transform:uppercase;color:#a1a1aa">
+          <span style="width:7px;height:7px;border-radius:50%;background:#1aa179;box-shadow:0 0 10px #1aa179"></span>
+          <span data-l="pt">Disponível para novas oportunidades</span><span data-l="en">Available for new opportunities</span>
+        </div>
+        <h1 style="font-family:Nobile,sans-serif;font-weight:700;font-size:clamp(52px,8vw,124px);line-height:.92;letter-spacing:-.02em;margin-bottom:10px">Portfólio</h1>
+        <div style="font-family:'Libre Franklin',sans-serif;font-weight:300;font-size:clamp(22px,3.4vw,44px);line-height:1.05;letter-spacing:-.01em;color:#d4d4d8;margin-bottom:28px">Benedita Magalhães <span style="color:#8b5cf6">—</span> <span style="font-weight:400;color:#fff">UX / UI Designer</span></div>
+        <p style="max-width:560px;font-size:clamp(16px,1.5vw,20px);line-height:1.6;color:#a1a1aa;margin-bottom:40px">
+          <span data-l="pt">Especializada em <strong style="color: rgb(232, 226, 255); font-weight: 600;">Design Systems</strong> e <strong style="color: rgb(232, 226, 255); font-weight: 600;">Inteligência Artificial</strong> aplicada ao Design. Crio interfaces intuitivas, escaláveis e centradas no usuário usando Claude Design e outras ferramentas de IA para acelerar prototipação, iteração e otimização da experiência.</span>
+          <span data-l="en">Specialized in <strong style="color: rgb(232, 226, 255); font-weight: 600;">Design Systems</strong> and <strong style="color: rgb(232, 226, 255); font-weight: 600;">Artificial Intelligence</strong> applied to Design. I craft intuitive, scalable, user-centered interfaces — using Claude Design and other AI tools to speed up prototyping, iteration and experience optimization.</span>
+        </p>
+        <div style="display:flex;flex-wrap:wrap;gap:16px;align-items:center">
+          <a href="#trabalhos" style="display:inline-flex;align-items:center;gap:12px;padding:16px 30px;border-radius:999px;background:#8b5cf6;color:#fff;font-family:Archivo,sans-serif;font-weight:600;font-size:16px" style-hover="background:#7c3aed;transform:translateY(-2px)">
+            <span data-l="pt">Conheça meus trabalhos</span><span data-l="en">See my work</span>
+            <span style="font-size:18px">↓</span>
+          </a>
+          <a href="#contato" style="display:inline-flex;align-items:center;gap:10px;padding:16px 28px;border-radius:999px;border:1px solid rgba(255,255,255,.18);color:#f4f4f5;font-family:Archivo,sans-serif;font-weight:500;font-size:16px" style-hover="border-color:#8b5cf6;color:#c4b5fd">
+            <span data-l="pt">Vamos conversar</span><span data-l="en">Let's talk</span>
+          </a>
+        </div>
+      </div>
+      <div style="position:relative;justify-self:center">
+        <div style="position:relative;width:min(360px,74vw);aspect-ratio:9/13;border-radius:22px;overflow:hidden;border:1px solid rgba(255,255,255,.12);box-shadow:0 40px 90px rgba(0,0,0,.6)">
+          <img src="uploads/Foto de Benedita Magalhães.jpg" alt="Benedita Magalhães" style="width:100%;height:100%;object-fit:cover;object-position:center 22%">
+          <div style="position:absolute;inset:0;background:linear-gradient(180deg,transparent 55%,rgba(8,8,10,.55))"></div>
+        </div>
+        <div style="position:absolute;top:-26px;left:-30px;font-size:46px;animation:bob 4s ease-in-out infinite">👋</div>
+        <div style="position:absolute;bottom:26px;left:-34px;padding:14px 18px;border-radius:16px;background:rgba(20,20,24,.86);backdrop-filter:blur(8px);border:1px solid rgba(255,255,255,.1);animation:floaty 6s ease-in-out infinite">
+          <div style="font-family:'DM Mono',monospace;font-size:11px;letter-spacing:.12em;color:#71717a;text-transform:uppercase"><span data-l="pt">Impacto</span><span data-l="en">Impact</span></div>
+          <div style="font-family:Nobile,sans-serif;font-weight:700;font-size:26px;color:#fff">+136 <span style="font-size:15px;font-weight:400;color:#a1a1aa"><span data-l="pt">serviços</span><span data-l="en">services</span></span></div>
+        </div>
+        <div style="position:absolute;top:40px;right:-30px;padding:14px 18px;border-radius:16px;background:rgba(20,20,24,.86);backdrop-filter:blur(8px);border:1px solid rgba(255,255,255,.1);animation:floaty 7s ease-in-out infinite .6s">
+          <div style="font-family:'DM Mono',monospace;font-size:11px;letter-spacing:.12em;color:#71717a;text-transform:uppercase"><span data-l="pt">Foco</span><span data-l="en">Focus</span></div>
+          <div style="font-family:Nobile,sans-serif;font-weight:700;font-size:20px;color:#fff">IA · UI · Design System</div>
+        </div>
+      </div>
+    </div>
+    <div style="position:absolute;left:50%;bottom:26px;transform:translateX(-50%);display:flex;flex-direction:column;align-items:center;gap:8px;font-family:'DM Mono',monospace;font-size:11px;letter-spacing:.24em;color:#52525b;text-transform:uppercase">
+      <span data-l="pt">Role para explorar</span><span data-l="en">Scroll to explore</span>
+      <span style="width:1px;height:34px;background:linear-gradient(#52525b,transparent)"></span>
+    </div>
+  </section>
+
+  <!-- ABOUT -->
+  <section id="sobre" style="position:relative;margin-left:56px;padding:clamp(80px,10vw,140px) clamp(24px,6vw,96px)">
+    <div style="max-width:1180px;margin:0 auto">
+      <div class="revl" style="display:flex;align-items:center;gap:16px;margin-bottom:56px">
+        <span style="font-family:'DM Mono',monospace;font-size:13px;color:#8b5cf6;letter-spacing:.1em">01</span>
+        <span style="font-family:'DM Mono',monospace;font-size:13px;color:#71717a;letter-spacing:.24em;text-transform:uppercase"><span data-l="pt">Vou me apresentar</span><span data-l="en">Let me introduce myself</span></span>
+        <span style="flex:1;height:1px;background:rgba(255,255,255,.1)"></span>
+      </div>
+      <div style="display:grid;grid-template-columns:.9fr 1.1fr;gap:clamp(36px,5vw,80px);align-items:start">
+        <div class="revl" style="position:relative">
+          <div style="border-radius:20px;overflow:hidden;border:1px solid rgba(255,255,255,.1);aspect-ratio:4/5">
+            <img src="uploads/Foto de Benedita Magalhães.jpg" alt="Benedita Magalhães" style="width:100%;height:100%;object-fit:cover;object-position:center 20%">
+          </div>
+          <div style="position:absolute;-webkit-backdrop-filter:blur(8px);bottom:-22px;right:-14px;padding:16px 20px;border-radius:16px;background:#8b5cf6;color:#fff;box-shadow:0 20px 50px rgba(139,92,246,.4)">
+            <div style="font-family:Nobile,sans-serif;font-weight:700;font-size:19px;line-height:1.1">UX · IA · DS</div>
+            <div style="font-size:13px;opacity:.85"><span data-l="pt">Design + código</span><span data-l="en">Design + code</span></div>
+          </div>
+        </div>
+        <div class="revl">
+          <h2 style="font-family:Nobile,sans-serif;font-weight:700;font-size:clamp(30px,4vw,52px);line-height:1.05;letter-spacing:-.02em;margin-bottom:28px"><span data-l="pt">Primeiramente, seja bem-vindo!</span><span data-l="en">First of all, welcome!</span></h2>
+          <div style="font-size:clamp(16px,1.4vw,19px);line-height:1.7;color:#b6b6bd;display:flex;flex-direction:column;gap:18px">
+            <p><span data-l="pt">Sou <strong style="color:#fff;font-weight:600">Benedita Magalhães</strong>, UX/UI Designer especializada em <strong style="color:#fff;font-weight:600">Design Systems</strong> e <strong style="color:#fff;font-weight:600">Inteligência Artificial aplicada ao Design</strong>. Atuo na criação de experiências digitais para softwares e aplicações, desenvolvendo interfaces intuitivas, escaláveis e centradas no usuário.</span><span data-l="en">I'm <strong style="color:#fff;font-weight:600">Benedita Magalhães</strong>, a UX/UI Designer specialized in <strong style="color:#fff;font-weight:600">Design Systems</strong> and <strong style="color:#fff;font-weight:600">Artificial Intelligence applied to Design</strong>. I create digital experiences for software and applications, building intuitive, scalable and user-centered interfaces.</span></p>
+            <p><span data-l="pt">Utilizo <strong style="color:#c4b5fd;font-weight:600">Claude Design</strong> e outras ferramentas de IA para acelerar a prototipação, a iteração e a otimização da experiência do usuário.</span><span data-l="en">I use <strong style="color:#c4b5fd;font-weight:600">Claude Design</strong> and other AI tools to accelerate prototyping, iteration and user-experience optimization.</span></p>
+            <p><span data-l="pt">Tenho experiência na criação e evolução de Design Systems, componentização para front-end, prototipação interativa, testes de usabilidade e colaboração com times de Produto e Engenharia transformando requisitos de negócio em soluções digitais eficientes.</span><span data-l="en">I have experience creating and evolving Design Systems, front-end componentization, interactive prototyping, usability testing and collaboration with Product and Engineering teams — turning business requirements into efficient digital solutions.</span></p>
+            <p style="color:#e8e2ff"><span data-l="pt">Meu foco é integrar <strong style="color:#fff;font-weight:600">UX, IA e Design Systems</strong> para criar softwares mais consistentes, inovadores e alinhados às necessidades dos usuários e aos objetivos do negócio.</span><span data-l="en">My focus is integrating <strong style="color:#fff;font-weight:600">UX, AI and Design Systems</strong> to build software that is more consistent, innovative and aligned with user needs and business goals.</span></p>
+          </div>
+          <div style="margin-top:36px">
+            <div style="font-family:'DM Mono',monospace;font-size:12px;letter-spacing:.18em;text-transform:uppercase;color:#71717a;margin-bottom:16px"><span data-l="pt">Instituições com quem colaborei</span><span data-l="en">Institutions I've collaborated with</span></div>
+            <div style="display:flex;flex-wrap:wrap;gap:10px">
+              <span style="padding:9px 16px;border:1px solid rgba(255,255,255,.14);border-radius:999px;font-family:'DM Mono',monospace;font-size:13px;color:#d4d4d8">TJAC</span>
+              <span style="padding:9px 16px;border:1px solid rgba(255,255,255,.14);border-radius:999px;font-family:'DM Mono',monospace;font-size:13px;color:#d4d4d8">SEICT</span>
+              <span style="padding:9px 16px;border:1px solid rgba(255,255,255,.14);border-radius:999px;font-family:'DM Mono',monospace;font-size:13px;color:#d4d4d8">SEAD</span>
+              <span style="padding:9px 16px;border:1px solid rgba(255,255,255,.14);border-radius:999px;font-family:'DM Mono',monospace;font-size:13px;color:#d4d4d8">MSB Tecnologia</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- METHOD / SKILLS -->
+  <section id="metodo" style="position:relative;margin-left:56px;padding:clamp(70px,8vw,120px) clamp(24px,6vw,96px);background:#0c0c0f;border-top:1px solid rgba(255,255,255,.06);border-bottom:1px solid rgba(255,255,255,.06)">
+    <div style="max-width:1180px;margin:0 auto">
+      <div class="revl" style="display:flex;align-items:center;gap:16px;margin-bottom:52px">
+        <span style="font-family:'DM Mono',monospace;font-size:13px;color:#8b5cf6;letter-spacing:.1em">02</span>
+        <span style="font-family:'DM Mono',monospace;font-size:13px;color:#71717a;letter-spacing:.24em;text-transform:uppercase"><span data-l="pt">Método &amp; Ferramentas</span><span data-l="en">Method &amp; Tools</span></span>
+        <span style="flex:1;height:1px;background:rgba(255,255,255,.1)"></span>
+      </div>
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:20px;margin-bottom:56px">
+        <div class="revl" style="padding:30px;border-radius:18px;background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.08)">
+          <div style="font-size:26px;margin-bottom:16px">🔍</div>
+          <h3 style="font-family:Nobile,sans-serif;font-weight:700;font-size:21px;margin-bottom:10px"><span data-l="pt">Descobrir</span><span data-l="en">Discover</span></h3>
+          <p style="font-size:15px;line-height:1.6;color:#a1a1aa"><span data-l="pt">Pesquisa com usuários, entrevistas e mapeamento da jornada para entender o problema real.</span><span data-l="en">User research, interviews and journey mapping to understand the real problem.</span></p>
+        </div>
+        <div class="revl" style="padding:30px;border-radius:18px;background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.08)">
+          <div style="font-size:26px;margin-bottom:16px">🧩</div>
+          <h3 style="font-family:Nobile,sans-serif;font-weight:700;font-size:21px;margin-bottom:10px"><span data-l="pt">Definir</span><span data-l="en">Define</span></h3>
+          <p style="font-size:15px;line-height:1.6;color:#a1a1aa"><span data-l="pt">Personas, problem statements e priorização com o time usando Design Thinking e Lean UX.</span><span data-l="en">Personas, problem statements and prioritization with the team using Design Thinking and Lean UX.</span></p>
+        </div>
+        <div class="revl" style="padding:30px;border-radius:18px;background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.08)">
+          <div style="font-size:26px;margin-bottom:16px">✏️</div>
+          <h3 style="font-family:Nobile,sans-serif;font-weight:700;font-size:21px;margin-bottom:10px"><span data-l="pt">Prototipar</span><span data-l="en">Prototype</span></h3>
+          <p style="font-size:15px;line-height:1.6;color:#a1a1aa"><span data-l="pt">Wireframes, protótipos navegáveis e Design Systems escaláveis, acelerados por IA e alinhados ao time de dev.</span><span data-l="en">Wireframes, navigable prototypes and scalable Design Systems, accelerated by AI and aligned with the dev team.</span></p>
+        </div>
+        <div class="revl" style="padding:30px;border-radius:18px;background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.08)">
+          <div style="font-size:26px;margin-bottom:16px">✅</div>
+          <h3 style="font-family:Nobile,sans-serif;font-weight:700;font-size:21px;margin-bottom:10px"><span data-l="pt">Validar</span><span data-l="en">Validate</span></h3>
+          <p style="font-size:15px;line-height:1.6;color:#a1a1aa"><span data-l="pt">Testes de usabilidade e acessibilidade, iterando cada detalhe antes da implementação.</span><span data-l="en">Usability and accessibility testing, iterating every detail before implementation.</span></p>
+        </div>
+      </div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:48px" class="revl">
+        <div>
+          <div style="font-family:'DM Mono',monospace;font-size:12px;letter-spacing:.18em;text-transform:uppercase;color:#71717a;margin-bottom:18px"><span data-l="pt">Competências</span><span data-l="en">Skills</span></div>
+          <div style="display:flex;flex-wrap:wrap;gap:9px">
+            <span style="padding:8px 15px;border-radius:8px;background:rgba(139,92,246,.12);border:1px solid rgba(139,92,246,.3);font-size:14px;color:#c4b5fd">Design System</span>
+            <span style="padding:8px 15px;border-radius:8px;background:rgba(139,92,246,.12);border:1px solid rgba(139,92,246,.3);font-size:14px;color:#c4b5fd"><span data-l="pt">IA aplicada ao Design</span><span data-l="en">AI applied to Design</span></span>
+            <span style="padding:8px 15px;border-radius:8px;background:rgba(139,92,246,.12);border:1px solid rgba(139,92,246,.3);font-size:14px;color:#c4b5fd">UI Design</span>
+            <span style="padding:8px 15px;border-radius:8px;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.1);font-size:14px;color:#d4d4d8">UX Research</span>
+            <span style="padding:8px 15px;border-radius:8px;background:rgba(139,92,246,.12);border:1px solid rgba(139,92,246,.3);font-size:14px;color:#c4b5fd"><span data-l="pt">Componentização front-end</span><span data-l="en">Front-end componentization</span></span>
+            <span style="padding:8px 15px;border-radius:8px;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.1);font-size:14px;color:#d4d4d8">Design Thinking</span>
+            <span style="padding:8px 15px;border-radius:8px;background:rgba(139,92,246,.12);border:1px solid rgba(139,92,246,.3);font-size:14px;color:#c4b5fd">Lean UX</span>
+            <span style="padding:8px 15px;border-radius:8px;background:rgba(139,92,246,.12);border:1px solid rgba(139,92,246,.3);font-size:14px;color:#c4b5fd"><span data-l="pt">Prototipagem</span><span data-l="en">Prototyping</span></span>
+            <span style="padding:8px 15px;border-radius:8px;background:rgba(139,92,246,.12);border:1px solid rgba(139,92,246,.3);font-size:14px;color:#c4b5fd"><span data-l="pt">Acessibilidade</span><span data-l="en">Accessibility</span></span>
+          </div>
+        </div>
+        <div>
+          <div style="font-family:'DM Mono',monospace;font-size:12px;letter-spacing:.18em;text-transform:uppercase;color:#71717a;margin-bottom:18px"><span data-l="pt">Ferramentas</span><span data-l="en">Tools</span></div>
+          <div style="display:flex;flex-wrap:wrap;gap:9px">
+            <span style="padding:8px 15px;border-radius:8px;background:rgba(139,92,246,.12);border:1px solid rgba(139,92,246,.3);font-size:14px;color:#c4b5fd">Claude Design</span>
+            <span style="padding:8px 15px;border-radius:8px;background:rgba(139,92,246,.12);border:1px solid rgba(139,92,246,.3);font-size:14px;color:#c4b5fd">Figma</span>
+            <span style="padding:8px 15px;border-radius:8px;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.1);font-size:14px;color:#d4d4d8">FigJam</span>
+            <span style="padding:8px 15px;border-radius:8px;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.1);font-size:14px;color:#d4d4d8">Design Tokens</span>
+            <span style="padding:8px 15px;border-radius:8px;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.1);font-size:14px;color:#d4d4d8">Gov.br DS</span>
+            <span style="padding:8px 15px;border-radius:8px;background:rgba(139,92,246,.12);border:1px solid rgba(139,92,246,.3);font-size:14px;color:#c4b5fd">HTML / CSS</span>
+            <span style="padding:8px 15px;border-radius:8px;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.1);font-size:14px;color:#d4d4d8">Jira</span>
+          </div>
+          <div style="margin-top:34px;padding:22px 24px;border-radius:16px;background:linear-gradient(120deg,rgba(139,92,246,.14),rgba(26,161,121,.1));border:1px solid rgba(255,255,255,.1)">
+            <div style="font-family:Nobile,sans-serif;font-weight:700;font-size:19px;margin-bottom:6px"><span data-l="pt">IA + Design System</span><span data-l="en">AI + Design System</span></div>
+            <p style="font-size:14px;line-height:1.55;color:#a1a1aa"><span data-l="pt">Integro IA ao fluxo de design para prototipar mais rápido e manter sistemas consistentes, colaborando de perto com Produto e Engenharia.</span><span data-l="en">I bring AI into the design flow to prototype faster and keep systems consistent, collaborating closely with Product and Engineering.</span></p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- HOW I WORK WITH AI -->
+  <section id="ia" style="position:relative;margin-left:56px;padding:clamp(70px,8vw,120px) clamp(24px,6vw,96px)">
+    <div style="max-width:1180px;margin:0 auto">
+      <div class="revl" style="display:flex;align-items:center;gap:16px;margin-bottom:44px">
+        <span style="font-family:'DM Mono',monospace;font-size:13px;color:#8b5cf6;letter-spacing:.1em">03</span>
+        <span style="font-family:'DM Mono',monospace;font-size:13px;color:#71717a;letter-spacing:.24em;text-transform:uppercase"><span data-l="pt">Como trabalho com IA</span><span data-l="en">How I work with AI</span></span>
+        <span style="flex:1;height:1px;background:rgba(255,255,255,.1)"></span>
+      </div>
+      <div class="revl" style="display:grid;grid-template-columns:1.1fr .9fr;gap:clamp(28px,4vw,60px);align-items:end;margin-bottom:46px">
+        <h2 style="font-family:Nobile,sans-serif;font-weight:700;font-size:clamp(30px,4.4vw,58px);line-height:1.02;letter-spacing:-.02em"><span data-l="pt">A IA é minha<br>parceira de design.</span><span data-l="en">AI is my<br>design partner.</span></h2>
+        <p style="font-size:16px;line-height:1.65;color:#a1a1aa"><span data-l="pt">Uso <strong style="color: rgb(196, 181, 253);">Claude Design</strong> e outras ferramentas de IA em cada etapa não para substituir o julgamento de design, mas para chegar mais rápido a boas decisões e manter o sistema consistente.</span><span data-l="en">I use <strong style="color:#c4b5fd">Claude Design</strong> and other AI tools at every stage — not to replace design judgment, but to reach good decisions faster and keep the system consistent.</span></p>
+      </div>
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:20px">
+        <div class="revl" style="padding:28px;border-radius:18px;background:rgba(139,92,246,.06);border:1px solid rgba(139,92,246,.22)">
+          <div style="font-family:'DM Mono',monospace;font-size:12px;color:#8b5cf6;letter-spacing:.14em;margin-bottom:14px">01</div>
+          <h3 style="font-family:Nobile,sans-serif;font-weight:700;font-size:20px;margin-bottom:10px"><span data-l="pt">Explorar variações</span><span data-l="en">Explore variations</span></h3>
+          <p style="font-size:15px;line-height:1.6;color:#a1a1aa"><span data-l="pt">Gero e comparo direções de layout e fluxo em minutos, ampliando o espaço de soluções antes de decidir.</span><span data-l="en">I generate and compare layout and flow directions in minutes, widening the solution space before committing.</span></p>
+        </div>
+        <div class="revl" style="padding:28px;border-radius:18px;background:rgba(139,92,246,.06);border:1px solid rgba(139,92,246,.22)">
+          <div style="font-family:'DM Mono',monospace;font-size:12px;color:#8b5cf6;letter-spacing:.14em;margin-bottom:14px">02</div>
+          <h3 style="font-family:Nobile,sans-serif;font-weight:700;font-size:20px;margin-bottom:10px"><span data-l="pt">Componentizar o DS</span><span data-l="en">Componentize the DS</span></h3>
+          <p style="font-size:15px;line-height:1.6;color:#a1a1aa"><span data-l="pt">Transformo padrões em componentes e tokens reutilizáveis, mantendo consistência entre telas e produtos.</span><span data-l="en">I turn patterns into reusable components and tokens, keeping consistency across screens and products.</span></p>
+        </div>
+        <div class="revl" style="padding:28px;border-radius:18px;background:rgba(139,92,246,.06);border:1px solid rgba(139,92,246,.22)">
+          <div style="font-family:'DM Mono',monospace;font-size:12px;color:#8b5cf6;letter-spacing:.14em;margin-bottom:14px">03</div>
+          <h3 style="font-family:Nobile,sans-serif;font-weight:700;font-size:20px;margin-bottom:10px"><span data-l="pt">Prototipar &amp; validar</span><span data-l="en">Prototype &amp; validate</span></h3>
+          <p style="font-size:15px;line-height:1.6;color:#a1a1aa"><span data-l="pt">Chego a protótipos navegáveis mais rápido e itero com base em testes de usabilidade e acessibilidade.</span><span data-l="en">I reach navigable prototypes faster and iterate based on usability and accessibility testing.</span></p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- WORK INTRO -->
+  <section id="trabalhos" style="position:relative;margin-left:56px;padding:clamp(80px,10vw,150px) clamp(24px,6vw,96px) clamp(30px,4vw,50px)">
+    <div style="max-width:1180px;margin:0 auto">
+      <div class="revl" style="display:flex;align-items:center;gap:16px;margin-bottom:40px">
+        <span style="font-family:'DM Mono',monospace;font-size:13px;color:#8b5cf6;letter-spacing:.1em">04</span>
+        <span style="font-family:'DM Mono',monospace;font-size:13px;color:#71717a;letter-spacing:.24em;text-transform:uppercase"><span data-l="pt">Trabalhos Selecionados</span><span data-l="en">Selected Work</span></span>
+        <span style="flex:1;height:1px;background:rgba(255,255,255,.1)"></span>
+      </div>
+      <div class="revl" style="display:grid;grid-template-columns:1.3fr .7fr;gap:40px;align-items:end">
+        <h2 style="font-family:Nobile,sans-serif;font-weight:700;font-size:clamp(34px,5.2vw,72px);line-height:1;letter-spacing:-.025em"><span data-l="pt">Sistemas que<br>escalam.</span><span data-l="en">Systems that<br>scale.</span></h2>
+        <p style="font-size:16px;line-height:1.65;color:#a1a1aa"><span data-l="pt">Portfólio sólido de design de produto, com features entregues em contextos complexos, densos em dados ou pesados em fluxo de trabalho onde cada interação tem impacto real. TJAC, governo e SaaS corporativo.</span><span data-l="en">A solid product-design portfolio, with features shipped in complex, data-dense and workflow-heavy contexts — where every interaction has real impact. Court system, government and corporate SaaS.</span></p>
+      </div>
+    </div>
+  </section>
+
+  <!-- CASE 1 · ADA (featured) -->
+  <section style="position:relative;margin-left:56px;padding:clamp(50px,6vw,80px) clamp(24px,6vw,96px)">
+    <div style="max-width:1180px;margin:0 auto">
+      <div class="revl" style="display:flex;align-items:center;gap:12px;margin-bottom:22px;flex-wrap:wrap">
+        <span style="padding:6px 13px;border-radius:999px;background:#8b5cf6;color:#fff;font-family:'DM Mono',monospace;font-size:12px;letter-spacing:.06em"><span data-l="pt">Caso em destaque</span><span data-l="en">Featured case</span></span>
+        <span style="padding:6px 13px;border-radius:999px;background:rgba(139,92,246,.16);border:1px solid rgba(139,92,246,.45);font-family:'DM Mono',monospace;font-size:12px;letter-spacing:.06em;color:#c4b5fd">TJAC · IA</span>
+        <span style="font-family:'DM Mono',monospace;font-size:12px;color:#52525b">CASE 01</span>
+      </div>
+      <div class="revl" style="display:grid;grid-template-columns:1fr 1fr;gap:clamp(30px,4vw,64px);align-items:center">
+        <div>
+          <h3 style="font-family:Nobile,sans-serif;font-weight:700;font-size:clamp(34px,4.6vw,60px);line-height:1;letter-spacing:-.02em;color:#8b5cf6;margin-bottom:8px">ADA</h3>
+          <div style="font-family:'Libre Franklin',sans-serif;font-weight:300;font-size:19px;color:#d4d4d8;margin-bottom:22px"><span data-l="pt">Assistente Digital Ampliada · IA para juízes</span><span data-l="en">Augmented Digital Assistant · AI for judges</span></div>
+          <p style="font-size:17px;line-height:1.6;color:#cfcfd6;margin-bottom:26px"><span data-l="pt">Um assistente de IA que ajuda juízes a analisar processos, elaborar ementas e organizar audiências desenhado para um domínio jurídico denso, com foco em confiança e clareza da informação.</span><span data-l="en">An AI assistant that helps judges analyze cases, draft summaries and organize hearings — designed for a dense legal domain, with a focus on trust and clarity of information.</span></p>
+          <div style="display:flex;flex-direction:column;gap:20px;font-size:16px;line-height:1.65;color:#b6b6bd">
+            <div>
+              <div style="font-family:'DM Mono',monospace;font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:#a78bfa;margin-bottom:7px"><span data-l="pt">Problema</span><span data-l="en">Problem</span></div>
+              <p><span data-l="pt">Juízes precisavam analisar sentenças com rapidez, mas o volume de dados e documentos tornava o processo lento e cansativo.</span><span data-l="en">Judges needed to analyze rulings quickly, but the volume of data and documents made the process slow and tiring.</span></p>
+            </div>
+            <div>
+              <div style="font-family:'DM Mono',monospace;font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:#a78bfa;margin-bottom:7px"><span data-l="pt">Meu papel</span><span data-l="en">My role</span></div>
+              <p><span data-l="pt">UX/UI Designer responsável pela experiência ponta a ponta pesquisa com juízes, arquitetura da informação, UI e handoff, em colaboração direta com o time de desenvolvimento.</span><span data-l="en">UX/UI Designer responsible for the end-to-end experience — research with judges, information architecture, UI and handoff, in close collaboration with engineering.</span></p>
+            </div>
+            <div>
+              <div style="font-family:'DM Mono',monospace;font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:#a78bfa;margin-bottom:7px"><span data-l="pt">Decisões de design</span><span data-l="en">Design decisions</span></div>
+              <p><span data-l="pt">Organizei cada capacidade da IA em cards modulares e ações claras, otimizando o consumo de recursos LLM e deixando explícito o que o sistema fez em cada etapa.</span><span data-l="en">I organized each AI capability into modular cards and clear actions, optimizing LLM resource usage and making explicit what the system did at each step.</span></p>
+            </div>
+            <div>
+              <div style="font-family:'DM Mono',monospace;font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:#a78bfa;margin-bottom:7px"><span data-l="pt">Solução</span><span data-l="en">Solution</span></div>
+              <p><span data-l="pt">A ADA analisa, elabora ementas, anonimiza, transcreve e organiza audiências agregando valor real ao dia a dia dos juízes.</span><span data-l="en">ADA analyzes, drafts summaries, anonymizes, transcribes and organizes hearings — adding real value to judges' daily work.</span></p>
+            </div>
+          </div>
+        </div>
+        <div style="display:flex;flex-direction:column;gap:20px">
+          <div style="border-radius:16px;overflow:hidden;border:1px solid rgba(255,255,255,.1);background:#0f0f13;box-shadow:0 30px 70px rgba(0,0,0,.5)">
+            <img src="assets/fig/ada-inicio.png" alt="ADA interface" style="width:100%;display:block">
+          </div>
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px">
+            <div style="padding:20px;border-radius:14px;background:rgba(139,92,246,.08);border:1px solid rgba(139,92,246,.25)">
+              <div style="font-family:Nobile,sans-serif;font-weight:700;font-size:30px;color:#fff;line-height:1">5<span style="font-size:16px;color:#c4b5fd">+</span></div>
+              <div style="font-size:13px;color:#a1a1aa;margin-top:6px"><span data-l="pt">capacidades de IA em um só fluxo</span><span data-l="en">AI capabilities in one flow</span></div>
+            </div>
+            <div style="padding:20px;border-radius:14px;background:rgba(139,92,246,.08);border:1px solid rgba(139,92,246,.25)">
+              <div style="font-family:Nobile,sans-serif;font-weight:700;font-size:30px;color:#fff;line-height:1">60%</div>
+              <div style="font-size:13px;color:#a1a1aa;margin-top:6px"><span data-l="pt">menos tempo de análise</span><span data-l="en">less analysis time · <em style="color:#8b5cf6;font-style:normal">set</em></span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="revl" style="display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:28px">
+        <img src="assets/fig/ada-s1.jpg" alt="ADA tela" style="width:100%;border-radius:12px;border:1px solid rgba(255,255,255,.09)">
+        <img src="assets/fig/ada-s2.jpg" alt="ADA tela" style="width:100%;border-radius:12px;border:1px solid rgba(255,255,255,.09)">
+        <img src="assets/fig/ada-s3.jpg" alt="ADA tela" style="width:100%;border-radius:12px;border:1px solid rgba(255,255,255,.09)">
+      </div>
+    </div>
+  </section>
+
+  <!-- CASE 2 · SPROL -->
+  <section style="position:relative;margin-left:56px;padding:clamp(50px,6vw,80px) clamp(24px,6vw,96px);background:#0c0c0f;border-top:1px solid rgba(255,255,255,.06);border-bottom:1px solid rgba(255,255,255,.06)">
+    <div style="max-width:1180px;margin:0 auto">
+      <div class="revl" style="display:grid;grid-template-columns:1fr 1fr;gap:clamp(30px,4vw,64px);align-items:center">
+        <div style="order:2">
+          <div style="display:flex;align-items:center;gap:12px;margin-bottom:22px">
+            <span style="padding:6px 13px;border-radius:999px;background:rgba(110,168,254,.14);border:1px solid rgba(110,168,254,.4);font-family:'DM Mono',monospace;font-size:12px;letter-spacing:.06em;color:#93c5fd">TJAC</span>
+            <span style="font-family:'DM Mono',monospace;font-size:12px;color:#52525b">CASE 02</span>
+          </div>
+          <h3 style="font-family:Nobile,sans-serif;font-weight:700;font-size:clamp(30px,4vw,52px);line-height:1.02;letter-spacing:-.02em;color:#6ea8fe;margin-bottom:8px">SPROL</h3>
+          <div style="font-family:'Libre Franklin',sans-serif;font-weight:300;font-size:19px;color:#d4d4d8;margin-bottom:24px"><span data-l="pt">Produtividade de Juízes Leigos e Conciliadores</span><span data-l="en">Productivity of Lay Judges &amp; Conciliators</span></div>
+          <div style="display:flex;flex-direction:column;gap:20px;font-size:16px;line-height:1.65;color:#b6b6bd">
+            <div>
+              <div style="font-family:'DM Mono',monospace;font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:#6ea8fe;margin-bottom:7px"><span data-l="pt">Problema</span><span data-l="en">Problem</span></div>
+              <p><span data-l="pt">O cálculo de pagamento dos juízes leigos e conciliadores era engessado e precisava mudar a cada nova resolução.</span><span data-l="en">Payment calculation for lay judges and conciliators was rigid and had to be rebuilt with each new resolution.</span></p>
+            </div>
+            <div>
+              <div style="font-family:'DM Mono',monospace;font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:#6ea8fe;margin-bottom:7px"><span data-l="pt">Meu papel</span><span data-l="en">My role</span></div>
+              <p><span data-l="pt">UX/UI Designer&nbsp; pesquisa com administradores, modelagem do fluxo de cálculo e design da interface web e responsivo mobile.</span><span data-l="en">UX/UI Designer — research with administrators, modeling the calculation flow and designing the web and mobile interface.</span></p>
+            </div>
+            <div>
+              <div style="font-family:'DM Mono',monospace;font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:#6ea8fe;margin-bottom:7px"><span data-l="pt">Processo</span><span data-l="en">Process</span></div>
+              <p><span data-l="pt">Na pesquisa com administradores, identificamos a oportunidade de tornar o cálculo dinâmico, adaptável a futuras resoluções sem nova implementação.</span><span data-l="en">Researching with administrators, we found the opportunity to make the calculation dynamic — adaptable to future resolutions with no new implementation.</span></p>
+            </div>
+            <div>
+              <div style="font-family:'DM Mono',monospace;font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:#6ea8fe;margin-bottom:7px"><span data-l="pt">Solução</span><span data-l="en">Solution</span></div>
+              <p><span data-l="pt">Um sistema que calcula pagamentos por dias úteis, simplificando uma dinâmica complexa em um fluxo claro e fácil de usar.</span><span data-l="en">A system that calculates payments by business days, simplifying complex logic into a clear, easy-to-use flow.</span></p>
+            </div>
+          </div>
+        </div>
+        <div style="order:1;display:flex;flex-direction:column;gap:18px">
+          <div style="border-radius:16px;overflow:hidden;border:1px solid rgba(255,255,255,.1);box-shadow:0 30px 70px rgba(0,0,0,.5)">
+            <img src="assets/fig/sprol-dash.jpg" alt="SPROL dashboard" style="width:100%;display:block">
+          </div>
+          <div style="display:flex;gap:14px;justify-content:flex-start">
+            <img src="assets/fig/sprol-m1.jpg" alt="SPROL mobile" style="width:31%;border-radius:16px;border:3px solid #1c1c22;box-shadow:0 20px 40px rgba(0,0,0,.5);object-fit:cover;object-position:top;aspect-ratio:9/17">
+            <img src="assets/fig/sprol-m3.jpg" alt="SPROL mobile" style="width:31%;border-radius:16px;border:3px solid #1c1c22;box-shadow:0 20px 40px rgba(0,0,0,.5);object-fit:cover;object-position:top;aspect-ratio:9/17;transform:translateY(-14px)">
+            <img src="assets/fig/sprol-m4.jpg" alt="SPROL mobile" style="width:31%;border-radius:16px;border:3px solid #1c1c22;box-shadow:0 20px 40px rgba(0,0,0,.5);object-fit:cover;object-position:top;aspect-ratio:9/17">
+          </div>
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px">
+            <div style="padding:20px;border-radius:14px;background:rgba(110,168,254,.08);border:1px solid rgba(110,168,254,.28)">
+              <div style="font-family:Nobile,sans-serif;font-weight:700;font-size:30px;color:#fff;line-height:1">0<span style="font-size:16px;color:#93c5fd"> impl.</span></div>
+              <div style="font-size:13px;color:#a1a1aa;margin-top:6px"><span data-l="pt">cálculo dinâmico nova resolução sem redesenvolver</span><span data-l="en">dynamic calc — new resolution, no rebuild</span></div>
+            </div>
+            <div style="padding:20px;border-radius:14px;background:rgba(110,168,254,.08);border:1px solid rgba(110,168,254,.28)">
+              <div style="font-family:Nobile,sans-serif;font-weight:700;font-size:30px;color:#fff;line-height:1">80%</div>
+              <div style="font-size:13px;color:#a1a1aa;margin-top:6px"><span data-l="pt">menos tempo no cálculo.<em style="color: rgb(110, 168, 254); font-style: normal;"></em></span><span data-l="en">less time on payroll · <em style="color:#6ea8fe;font-style:normal">set</em></span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CASE 3 · CONTRUX -->
+  <section style="position:relative;margin-left:56px;padding:clamp(50px,6vw,80px) clamp(24px,6vw,96px)">
+    <div style="max-width:1180px;margin:0 auto">
+      <div class="revl" style="display:grid;grid-template-columns:1fr 1fr;gap:clamp(30px,4vw,64px);align-items:center">
+        <div>
+          <div style="display:flex;align-items:center;gap:12px;margin-bottom:22px">
+            <span style="padding:6px 13px;border-radius:999px;background:rgba(163,205,32,.16);border:1px solid rgba(163,205,32,.45);font-family:'DM Mono',monospace;font-size:12px;letter-spacing:.06em;color:#bef264">MSB Tecnologia · SaaS</span>
+            <span style="font-family:'DM Mono',monospace;font-size:12px;color:#52525b">CASE 03</span>
+          </div>
+          <h3 style="font-family:Nobile,sans-serif;font-weight:700;font-size:clamp(30px,4vw,52px);line-height:1.02;letter-spacing:-.02em;color:#a3cd20;margin-bottom:8px">CONTRUX</h3>
+          <div style="font-family:'Libre Franklin',sans-serif;font-weight:300;font-size:19px;color:#d4d4d8;margin-bottom:24px"><span data-l="pt">SaaS de gestão de obras</span><span data-l="en">Construction management SaaS</span></div>
+          <div style="display:flex;flex-direction:column;gap:20px;font-size:16px;line-height:1.65;color:#b6b6bd">
+            <div>
+              <div style="font-family:'DM Mono',monospace;font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:#a3cd20;margin-bottom:7px"><span data-l="pt">Contexto</span><span data-l="en">Context</span></div>
+              <p><span data-l="pt">Uma solução corporativa que integra planejamento, orçamento, compras, estoque, equipe, cronograma e controle financeiro da obra em um só produto.</span><span data-l="en">A corporate solution integrating planning, budget, procurement, inventory, team, schedule and financial control of a construction site in one product.</span></p>
+            </div>
+            <div>
+              <div style="font-family:'DM Mono',monospace;font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:#a3cd20;margin-bottom:7px"><span data-l="pt">Meu papel</span><span data-l="en">My role</span></div>
+              <p><span data-l="pt">Pesquisa, protótipo e design de interface traduzindo um domínio complexo e denso em dados em telas claras e escaláveis.</span><span data-l="en">Research, prototyping and interface design — translating a complex, data-dense domain into clear, scalable screens.</span></p>
+            </div>
+            <div>
+              <div style="font-family:'DM Mono',monospace;font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:#a3cd20;margin-bottom:7px"><span data-l="pt">Impacto</span><span data-l="en">Impact</span></div>
+              <p><span data-l="pt">Melhora a gestão da obra, reduz desperdícios, otimiza recursos e evita atrasos e custos extras.</span><span data-l="en">Improves site management, reduces waste, optimizes resources and prevents delays and extra costs.</span></p>
+            </div>
+          </div>
+        </div>
+        <div style="position:relative;display:flex;flex-direction:column;gap:18px">
+          <img src="assets/fig/contrux-crono.jpg" alt="CONTRUX cronograma" style="width:100%;border-radius:16px;border:1px solid rgba(255,255,255,.1);box-shadow:0 30px 70px rgba(0,0,0,.5)">
+          <img src="assets/fig/contrux-planilha.jpg" alt="CONTRUX planilha" style="width:86%;align-self:flex-end;border-radius:14px;border:1px solid rgba(255,255,255,.1);box-shadow:0 24px 50px rgba(0,0,0,.5)">
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px">
+            <div style="padding:20px;border-radius:14px;background:rgba(163,205,32,.08);border:1px solid rgba(163,205,32,.28)">
+              <div style="font-family:Nobile,sans-serif;font-weight:700;font-size:30px;color:#fff;line-height:1">7</div>
+              <div style="font-size:13px;color:#a1a1aa;margin-top:6px"><span data-l="pt">módulos de gestão unificados</span><span data-l="en">management modules unified</span></div>
+            </div>
+            <div style="padding:20px;border-radius:14px;background:rgba(163,205,32,.08);border:1px solid rgba(163,205,32,.28)">
+              <div style="font-family:Nobile,sans-serif;font-weight:700;font-size:30px;color:#fff;line-height:1">70%</div>
+              <div style="font-size:13px;color:#a1a1aa;margin-top:6px"><span data-l="pt">menos desperdício&nbsp;</span><span data-l="en">less waste · <em style="color: rgb(163, 205, 32); font-style: normal;">set</em></span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- OTHER PROJECTS -->
+  <section style="position:relative;margin-left:56px;padding:clamp(50px,6vw,80px) clamp(24px,6vw,96px);background:#0c0c0f;border-top:1px solid rgba(255,255,255,.06);border-bottom:1px solid rgba(255,255,255,.06)">
+    <div style="max-width:1180px;margin:0 auto">
+      <div class="revl" style="display:flex;align-items:center;gap:16px;margin-bottom:40px">
+        <span style="font-family:'DM Mono',monospace;font-size:13px;color:#71717a;letter-spacing:.24em;text-transform:uppercase"><span data-l="pt">Outros projetos</span><span data-l="en">Other projects</span></span>
+        <span style="flex:1;height:1px;background:rgba(255,255,255,.1)"></span>
+      </div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:24px">
+        <div class="revl" style="border-radius:18px;overflow:hidden;border:1px solid rgba(255,255,255,.08);background:rgba(255,255,255,.02)">
+          <div style="aspect-ratio:16/9;overflow:hidden;background:#111114"><img src="assets/fig/cptec-dash.png" alt="CPTEC" style="width:100%;height:100%;object-fit:cover;object-position:top"></div>
+          <div style="padding:26px">
+            <div style="display:flex;align-items:center;gap:10px;margin-bottom:12px">
+              <span style="padding:5px 11px;border-radius:999px;background:rgba(26,161,121,.14);border:1px solid rgba(26,161,121,.4);font-family:'DM Mono',monospace;font-size:11px;color:#4ade80">TJAC</span>
+              <span style="font-family:Nobile,sans-serif;font-weight:700;font-size:22px;color:#1aa179">CPTEC</span>
+            </div>
+            <p style="font-size:15px;line-height:1.6;color:#a1a1aa"><span data-l="pt">Plataforma de cadastramento de auxiliares da justiça que simplifica a nomeação de peritos e amplia o número de profissionais cadastrados.</span><span data-l="en">Registration platform for court auxiliaries that simplifies appointing experts and expands the number of registered professionals.</span></p>
+          </div>
+        </div>
+        <div class="revl" style="border-radius:18px;overflow:hidden;border:1px solid rgba(255,255,255,.08);background:rgba(255,255,255,.02)">
+          <div style="aspect-ratio:16/9;overflow:hidden;background:#111114"><img src="assets/fig/acgov-login.jpg" alt="AC.GOV" style="width:100%;height:100%;object-fit:cover;object-position:top"></div>
+          <div style="padding:26px">
+            <div style="display:flex;align-items:center;gap:10px;margin-bottom:12px">
+              <span style="padding:5px 11px;border-radius:999px;background:rgba(59,130,246,.16);border:1px solid rgba(59,130,246,.45);font-family:'DM Mono',monospace;font-size:11px;color:#93c5fd">Governo do Acre</span>
+              <span style="font-family:Nobile,sans-serif;font-weight:700;font-size:22px;color:#3b82f6">AC.GOV</span>
+            </div>
+            <p style="font-size:15px;line-height:1.6;color:#a1a1aa"><span data-l="pt">Plataforma digital do cidadão com Design System baseado no Gov.br — login único e <strong style="color:#fff">+136 serviços</strong> disponíveis online.</span><span data-l="en">Citizen digital platform with a Gov.br-based Design System — single sign-on and <strong style="color:#fff">+136 services</strong> available online.</span></p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- DESIGN SYSTEM SHOWCASE -->
+  <section id="ds" style="position:relative;margin-left:56px;padding:clamp(80px,10vw,140px) clamp(24px,6vw,96px)">
+    <div style="max-width:1180px;margin:0 auto">
+      <div class="revl" style="display:flex;align-items:center;gap:16px;margin-bottom:44px">
+        <span style="font-family:'DM Mono',monospace;font-size:13px;color:#8b5cf6;letter-spacing:.1em">05</span>
+        <span style="font-family:'DM Mono',monospace;font-size:13px;color:#71717a;letter-spacing:.24em;text-transform:uppercase"><span data-l="pt">Design System em ação</span><span data-l="en">Design System in action</span></span>
+        <span style="flex:1;height:1px;background:rgba(255,255,255,.1)"></span>
+      </div>
+      <div class="revl" style="display:grid;grid-template-columns:1.1fr .9fr;gap:clamp(28px,4vw,60px);align-items:end;margin-bottom:48px">
+        <h2 style="font-family:Nobile,sans-serif;font-weight:700;font-size:clamp(30px,4.4vw,58px);line-height:1.02;letter-spacing:-.02em"><span data-l="pt">Não é só telas&nbsp;um sistema.</span><span data-l="en">Not just screens —<br>a system.</span></h2>
+        <p style="font-size:16px;line-height:1.65;color:#a1a1aa"><span data-l="pt">Por trás dos produtos, construo e mantenho a base: <strong style="color:#fff">tokens</strong>, <strong style="color:#fff">tipografia</strong> e <strong style="color:#fff">componentes</strong> reutilizáveis que garantem consistência e escalam entre times.</span><span data-l="en">Behind the products, I build and maintain the foundation: reusable <strong style="color:#fff">tokens</strong>, <strong style="color:#fff">typography</strong> and <strong style="color:#fff">components</strong> that ensure consistency and scale across teams.</span></p>
+      </div>
+
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:20px">
+        <!-- Tokens: color -->
+        <div class="revl" style="padding:30px;border-radius:18px;background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.08)">
+          <div style="font-family:'DM Mono',monospace;font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:#71717a;margin-bottom:20px">Color tokens</div>
+          <div style="display:flex;flex-direction:column;gap:14px">
+            <div style="display:flex;align-items:center;gap:14px">
+              <span style="width:44px;height:44px;border-radius:12px;background:#8b5cf6;box-shadow:0 6px 18px rgba(139,92,246,.4)"></span>
+              <div><div style="font-family:'DM Mono',monospace;font-size:13px;color:#f4f4f5">accent / 500</div><div style="font-family:'DM Mono',monospace;font-size:12px;color:#71717a">#8B5CF6</div></div>
+            </div>
+            <div style="display:flex;gap:8px">
+              <span style="flex:1;height:26px;border-radius:6px;background:#ede9fe"></span>
+              <span style="flex:1;height:26px;border-radius:6px;background:#c4b5fd"></span>
+              <span style="flex:1;height:26px;border-radius:6px;background:#8b5cf6"></span>
+              <span style="flex:1;height:26px;border-radius:6px;background:#6d28d9"></span>
+              <span style="flex:1;height:26px;border-radius:6px;background:#3b0764"></span>
+            </div>
+            <div style="display:flex;gap:8px">
+              <span style="flex:1;height:26px;border-radius:6px;background:#f4f4f5"></span>
+              <span style="flex:1;height:26px;border-radius:6px;background:#a1a1aa"></span>
+              <span style="flex:1;height:26px;border-radius:6px;background:#52525b"></span>
+              <span style="flex:1;height:26px;border-radius:6px;background:#26262b"></span>
+              <span style="flex:1;height:26px;border-radius:6px;background:#0c0c0f;border:1px solid rgba(255,255,255,.1)"></span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Tokens: type -->
+        <div class="revl" style="padding:30px;border-radius:18px;background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.08)">
+          <div style="font-family:'DM Mono',monospace;font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:#71717a;margin-bottom:20px">Type scale</div>
+          <div style="display:flex;flex-direction:column;gap:10px">
+            <div style="display:flex;align-items:baseline;justify-content:space-between;gap:12px;border-bottom:1px solid rgba(255,255,255,.06);padding-bottom:8px"><span style="font-family:Nobile,sans-serif;font-weight:700;font-size:34px">Aa</span><span style="font-family:'DM Mono',monospace;font-size:12px;color:#71717a">Nobile · Display</span></div>
+            <div style="display:flex;align-items:baseline;justify-content:space-between;gap:12px;border-bottom:1px solid rgba(255,255,255,.06);padding-bottom:8px"><span style="font-family:'Libre Franklin',sans-serif;font-weight:300;font-size:24px;color:#d4d4d8">Aa</span><span style="font-family:'DM Mono',monospace;font-size:12px;color:#71717a">Libre Franklin · Subtitle</span></div>
+            <div style="display:flex;align-items:baseline;justify-content:space-between;gap:12px;border-bottom:1px solid rgba(255,255,255,.06);padding-bottom:8px"><span style="font-family:Archivo,sans-serif;font-size:17px;color:#b6b6bd">Aa</span><span style="font-family:'DM Mono',monospace;font-size:12px;color:#71717a">Archivo · Body</span></div>
+            <div style="display:flex;align-items:baseline;justify-content:space-between;gap:12px"><span style="font-family:'DM Mono',monospace;font-size:14px;color:#a1a1aa">Aa</span><span style="font-family:'DM Mono',monospace;font-size:12px;color:#71717a">DM Mono · Label</span></div>
+          </div>
+        </div>
+
+        <!-- Components -->
+        <div class="revl" style="padding:30px;border-radius:18px;background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.08)">
+          <div style="font-family:'DM Mono',monospace;font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:#71717a;margin-bottom:20px">Components</div>
+          <div style="display:flex;flex-direction:column;gap:16px">
+            <div style="display:flex;gap:10px;flex-wrap:wrap">
+              <span style="padding:10px 18px;border-radius:999px;background:#8b5cf6;color:#fff;font-size:14px;font-weight:600">Primary</span>
+              <span style="padding:10px 18px;border-radius:999px;border:1px solid rgba(255,255,255,.2);color:#f4f4f5;font-size:14px">Secondary</span>
+            </div>
+            <div style="display:flex;gap:8px;flex-wrap:wrap">
+              <span style="padding:6px 12px;border-radius:8px;background:rgba(139,92,246,.12);border:1px solid rgba(139,92,246,.3);font-size:13px;color:#c4b5fd">Tag</span>
+              <span style="padding:6px 12px;border-radius:8px;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.1);font-size:13px;color:#d4d4d8">Neutral</span>
+              <span style="padding:6px 12px;border-radius:999px;background:rgba(26,161,121,.14);border:1px solid rgba(26,161,121,.4);font-size:13px;color:#4ade80">● Ativo</span>
+            </div>
+            <div style="display:flex;align-items:center;gap:10px;padding:11px 14px;border-radius:10px;background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.14)">
+              <span style="width:8px;height:8px;border-radius:50%;background:#52525b"></span>
+              <span style="font-size:14px;color:#71717a"><span data-l="pt">Campo de entrada</span><span data-l="en">Input field</span></span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section id="contato" style="position:relative;margin-left:56px;padding:clamp(90px,11vw,160px) clamp(24px,6vw,96px);overflow:hidden">
+    <div style="position:absolute;top:10%;right:-6%;width:460px;height:460px;border-radius:50%;background:radial-gradient(circle,#8b5cf6,transparent 68%);opacity:.22;filter:blur(20px)"></div>
+    <div style="position:relative;z-index:2;max-width:1180px;margin:0 auto;text-align:center">
+      <div class="revl" style="font-family:'DM Mono',monospace;font-size:13px;color:#71717a;letter-spacing:.24em;text-transform:uppercase;margin-bottom:26px"><span data-l="pt">Vamos criar algo juntos</span><span data-l="en">Let's build something together</span></div>
+      <h2 class="revl" style="font-family:Nobile,sans-serif;font-weight:700;font-size:clamp(42px,8vw,110px);line-height:.98;letter-spacing:-.03em;margin-bottom:40px"><span data-l="pt">Vamos conversar?</span><span data-l="en">Shall we talk?</span></h2>
+      <div class="revl" style="display:flex;flex-wrap:wrap;gap:16px;justify-content:center;margin-bottom:56px">
+        <a href="mailto:beneditabj@gmail.com" style="display:inline-flex;align-items:center;gap:12px;padding:18px 34px;border-radius:999px;background:#8b5cf6;color:#fff;font-family:Archivo,sans-serif;font-weight:600;font-size:17px" style-hover="background:#7c3aed;transform:translateY(-2px)">✉ beneditabj@gmail.com</a>
+        <a href="https://www.linkedin.com/in/beneditamagalhaes-design/" target="_blank" style="display:inline-flex;align-items:center;gap:12px;padding:18px 34px;border-radius:999px;border:1px solid rgba(255,255,255,.2);color:#f4f4f5;font-family:Archivo,sans-serif;font-weight:500;font-size:17px" style-hover="border-color:#8b5cf6;color:#c4b5fd">in · LinkedIn</a>
+      </div>
+      <div class="revl" style="display:inline-flex;flex-direction:column;align-items:center;gap:22px">
+        <span style="font-family: Nobile,sans-serif; font-weight: 700; font-size: 150px; line-height: 1; background: linear-gradient(120deg,#f4f4f5,#8b5cf6); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent">Obrigada</span>
+      </div>
+    </div>
+    <div style="max-width:1180px;margin:70px auto 0;display:flex;flex-wrap:wrap;gap:16px;justify-content:space-between;align-items:center;padding-top:30px;border-top:1px solid rgba(255,255,255,.08);font-family:'DM Mono',monospace;font-size:12px;color:#52525b">
+      <span>© 2026 Benedita Magalhães</span>
+      <span>UX / UI Product Designer</span>
+      <a href="#hero" style="color:#71717a"><span data-l="pt">Voltar ao topo ↑</span><span data-l="en">Back to top ↑</span></a>
+    </div>
+  </section>
+
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:1280,&quot;height&quot;:900}}">
+class Component extends DCLogic {
+  state = { lang: 'pt' };
+  componentDidMount() {
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach((e) => { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } });
+    }, { threshold: 0.12, rootMargin: '0px 0px -8% 0px' });
+    this._raf = requestAnimationFrame(() => {
+      (this.root || document).querySelectorAll('.revl').forEach((el) => io.observe(el));
+    });
+    this._io = io;
+  }
+  componentWillUnmount() { if (this._io) this._io.disconnect(); if (this._raf) cancelAnimationFrame(this._raf); }
+  renderVals() {
+    const lang = this.state.lang;
+    const on = 'padding:8px 14px;background:#8b5cf6;color:#fff;border:none;cursor:pointer;font-family:inherit;font-size:12px';
+    const off = 'padding:8px 14px;background:transparent;color:#a1a1aa;border:none;cursor:pointer;font-family:inherit;font-size:12px';
+    return {
+      rootClass: 'lang-' + lang,
+      setPt: () => this.setState({ lang: 'pt' }),
+      setEn: () => this.setState({ lang: 'en' }),
+      ptBtn: lang === 'pt' ? on : off,
+      enBtn: lang === 'en' ? on : off,
+    };
+  }
+}
+</script>
+</body>
+</html>
