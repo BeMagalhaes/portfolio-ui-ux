@@ -28,6 +28,30 @@
   @keyframes bob{0%,100%{transform:translateY(0) rotate(-6deg)}50%{transform:translateY(-8px) rotate(4deg)}}
   .revl{opacity:0;transform:translateY(28px);transition:opacity .7s cubic-bezier(.2,.7,.2,1),transform .7s cubic-bezier(.2,.7,.2,1)}
   .revl.in{opacity:1;transform:none}
+
+  /* ---------- RESPONSIVE ---------- */
+  @media (max-width: 900px){
+    section{margin-left:0 !important}
+    nav{left:0 !important}
+    .rail{display:none !important}
+    /* collapse every explicit two/three-column grid to a single column */
+    [style*="grid-template-columns"]{grid-template-columns:1fr !important}
+    /* keep small metric tiles side-by-side */
+    .metric-pair{grid-template-columns:1fr 1fr !important}
+  }
+  @media (max-width: 760px){
+    nav > div > a{display:none !important}
+    nav > div{gap:12px !important}
+    #hero{padding-top:96px !important}
+  }
+  @media (max-width: 560px){
+    nav{height:60px !important}
+    /* hide the floating hero flourishes so nothing overlaps */
+    [style*="animation:bob"],[style*="animation:floaty"]{display:none !important}
+    .metric-pair{grid-template-columns:1fr !important}
+    .obrigada{font-size:clamp(60px,20vw,96px) !important}
+    .footer-row{flex-direction:column !important;align-items:flex-start !important;gap:10px !important;text-align:left}
+  }
 </style>
 </helmet>
 <template id="__bundler_thumbnail" data-bg-color="#08080a">
@@ -41,7 +65,7 @@
 <div class="{{ rootClass }}" style="position:relative;width:100%;min-height:100vh;background:#08080a;color:#f4f4f5;font-family:Archivo,sans-serif;overflow-x:hidden">
 
   <!-- LEFT RAIL -->
-  <div style="position:fixed;left:0;top:0;bottom:0;width:56px;z-index:60;display:flex;flex-direction:column;align-items:center;justify-content:space-between;padding:22px 0;border-right:1px solid rgba(255,255,255,.08);background:rgba(8,8,10,.6);backdrop-filter:blur(8px)">
+  <div class="rail" style="position:fixed;left:0;top:0;bottom:0;width:56px;z-index:60;display:flex;flex-direction:column;align-items:center;justify-content:space-between;padding:22px 0;border-right:1px solid rgba(255,255,255,.08);background:rgba(8,8,10,.6);backdrop-filter:blur(8px)">
     <div style="width:9px;height:9px;border-radius:50%;background:#8b5cf6;box-shadow:0 0 14px #8b5cf6"></div>
     <div style="writing-mode:vertical-rl;transform:rotate(180deg);font-family:'DM Mono',monospace;font-size:12px;letter-spacing:.42em;text-transform:uppercase;color:#71717a">Portfólio&nbsp;&nbsp;·&nbsp;&nbsp;UX / UI Design</div>
     <div style="font-family:'DM Mono',monospace;font-size:11px;letter-spacing:.2em;color:#3f3f46">'25</div>
@@ -300,7 +324,7 @@
           <div style="border-radius:16px;overflow:hidden;border:1px solid rgba(255,255,255,.1);background:#0f0f13;box-shadow:0 30px 70px rgba(0,0,0,.5)">
             <img src="assets/fig/ada-inicio.png" alt="ADA interface" style="width:100%;display:block">
           </div>
-          <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px">
+          <div class="metric-pair" style="display:grid;grid-template-columns:1fr 1fr;gap:14px">
             <div style="padding:20px;border-radius:14px;background:rgba(139,92,246,.08);border:1px solid rgba(139,92,246,.25)">
               <div style="font-family:Nobile,sans-serif;font-weight:700;font-size:30px;color:#fff;line-height:1">5<span style="font-size:16px;color:#c4b5fd">+</span></div>
               <div style="font-size:13px;color:#a1a1aa;margin-top:6px"><span data-l="pt">capacidades de IA em um só fluxo</span><span data-l="en">AI capabilities in one flow</span></div>
@@ -359,7 +383,7 @@
             <img src="assets/fig/sprol-m3.jpg" alt="SPROL mobile" style="width:31%;border-radius:16px;border:3px solid #1c1c22;box-shadow:0 20px 40px rgba(0,0,0,.5);object-fit:cover;object-position:top;aspect-ratio:9/17;transform:translateY(-14px)">
             <img src="assets/fig/sprol-m4.jpg" alt="SPROL mobile" style="width:31%;border-radius:16px;border:3px solid #1c1c22;box-shadow:0 20px 40px rgba(0,0,0,.5);object-fit:cover;object-position:top;aspect-ratio:9/17">
           </div>
-          <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px">
+          <div class="metric-pair" style="display:grid;grid-template-columns:1fr 1fr;gap:14px">
             <div style="padding:20px;border-radius:14px;background:rgba(110,168,254,.08);border:1px solid rgba(110,168,254,.28)">
               <div style="font-family:Nobile,sans-serif;font-weight:700;font-size:30px;color:#fff;line-height:1">0<span style="font-size:16px;color:#93c5fd"> impl.</span></div>
               <div style="font-size:13px;color:#a1a1aa;margin-top:6px"><span data-l="pt">cálculo dinâmico nova resolução sem redesenvolver</span><span data-l="en">dynamic calc — new resolution, no rebuild</span></div>
@@ -403,7 +427,7 @@
         <div style="position:relative;display:flex;flex-direction:column;gap:18px">
           <img src="assets/fig/contrux-crono.jpg" alt="CONTRUX cronograma" style="width:100%;border-radius:16px;border:1px solid rgba(255,255,255,.1);box-shadow:0 30px 70px rgba(0,0,0,.5)">
           <img src="assets/fig/contrux-planilha.jpg" alt="CONTRUX planilha" style="width:86%;align-self:flex-end;border-radius:14px;border:1px solid rgba(255,255,255,.1);box-shadow:0 24px 50px rgba(0,0,0,.5)">
-          <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px">
+          <div class="metric-pair" style="display:grid;grid-template-columns:1fr 1fr;gap:14px">
             <div style="padding:20px;border-radius:14px;background:rgba(163,205,32,.08);border:1px solid rgba(163,205,32,.28)">
               <div style="font-family:Nobile,sans-serif;font-weight:700;font-size:30px;color:#fff;line-height:1">7</div>
               <div style="font-size:13px;color:#a1a1aa;margin-top:6px"><span data-l="pt">módulos de gestão unificados</span><span data-l="en">management modules unified</span></div>
@@ -534,10 +558,10 @@
         <a href="https://www.linkedin.com/in/beneditamagalhaes-design/" target="_blank" style="display:inline-flex;align-items:center;gap:12px;padding:18px 34px;border-radius:999px;border:1px solid rgba(255,255,255,.2);color:#f4f4f5;font-family:Archivo,sans-serif;font-weight:500;font-size:17px" style-hover="border-color:#8b5cf6;color:#c4b5fd">in · LinkedIn</a>
       </div>
       <div class="revl" style="display:inline-flex;flex-direction:column;align-items:center;gap:22px">
-        <span style="font-family: Nobile,sans-serif; font-weight: 700; font-size: 150px; line-height: 1; background: linear-gradient(120deg,#f4f4f5,#8b5cf6); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent">Obrigada</span>
+        <span class="obrigada" style="font-family: Nobile,sans-serif; font-weight: 700; font-size: 150px; line-height: 1; background: linear-gradient(120deg,#f4f4f5,#8b5cf6); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent">Obrigada</span>
       </div>
     </div>
-    <div style="max-width:1180px;margin:70px auto 0;display:flex;flex-wrap:wrap;gap:16px;justify-content:space-between;align-items:center;padding-top:30px;border-top:1px solid rgba(255,255,255,.08);font-family:'DM Mono',monospace;font-size:12px;color:#52525b">
+    <div class="footer-row" style="max-width:1180px;margin:70px auto 0;display:flex;flex-wrap:wrap;gap:16px;justify-content:space-between;align-items:center;padding-top:30px;border-top:1px solid rgba(255,255,255,.08);font-family:'DM Mono',monospace;font-size:12px;color:#52525b">
       <span>© 2026 Benedita Magalhães</span>
       <span>UX / UI Product Designer</span>
       <a href="#hero" style="color:#71717a"><span data-l="pt">Voltar ao topo ↑</span><span data-l="en">Back to top ↑</span></a>
